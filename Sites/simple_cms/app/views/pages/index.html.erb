@@ -1,31 +1,14 @@
-<style type="text/css">
-	table.listing {
-		width: 90%;
-		border: 1px solid blue;
-	}
+<% @page_title = "Pages" %>
 
-	tr.header {
-		color: red;
-	}
-	th {
-		border: 1px solid black;
-	}
-</style>
-
-<% if !flash[:notice].blank? %>
-	<div class="notice">
-		<%= flash[:notice] %>
-	</div>
-<% end %>
 <div class="pages index">
 	<h2>Pages</h2>
 
 	<%= link_to("Add New Page", {:action => 'new'}, :class => 'action new') %>
-
+	<br/><br/>
 	<table class="listing" summary="Page list">
 		<tr class="header">
-			<th>&nbsp;</th>
-			<th>Subject ID</th>
+			<th>Position</th>
+			<th>Subject</th>
 			<th>Page</th>
 			<th>Permalink</th>
 			<th>Visible</th>
@@ -33,12 +16,12 @@
 			<th>Actions</th>
 		</tr>
 		<% @pages.each do |page| %>
-		<tr>
+		<tr class="<%= cycle('odd', 'even') %>">
 			<td><%= page.position %></td>
-			<td><%= page.subject_id %></td>
+			<td><%= page.subject.name if page.subject %></td>
 			<td><%= page.name %></td>
 			<td><%= page.permalink %></td>
-			<td class="center"><%= page.visible ? 'Yes' : 'No' %></td>
+			<td class="center"><%= status_tag(page.visible) %></td>
 			<td class="center"><%= page.sections.size %></td>
 			<td class="actions">
 				<%= link_to("Show", {:action => 'show', :id => page.id}, :class => 'action show') %>
