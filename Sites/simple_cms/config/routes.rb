@@ -1,8 +1,16 @@
 Rails.application.routes.draw do
 
 
-  root "demo#index"
+  # get 'public/index'
+  # get 'public/show'
+  # get 'admin_users/index'
+  # get 'admin_users/new'
+  # get 'admin_users/edit'
+  # get 'admin_users/delete'
+
+  root "public#index"
   
+  get 'show/:permalink', :to => 'public#show'
   get 'admin', :to => "access#index"
 
   # get 'demo/index'
